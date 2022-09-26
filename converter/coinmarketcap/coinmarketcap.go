@@ -7,19 +7,19 @@ import (
 	cmc "github.com/miguelmota/go-coinmarketcap/pro/v1"
 )
 
-type Service struct {
+type CoinMarketCapConverter struct {
 	client *cmc.Client
 }
 
-func New() *Service {
-	return &Service{
+func New() *CoinMarketCapConverter {
+	return &CoinMarketCapConverter{
 		client: cmc.NewClient(&cmc.Config{
 			ProAPIKey: os.Getenv("CMC_API_KEY"),
 		}),
 	}
 }
 
-func (s *Service) Convert(amount float64, from, to string) (r float64, err error) {
+func (s *CoinMarketCapConverter) Convert(amount float64, from, to string) (r float64, err error) {
 	res, err := s.client.Tools.PriceConversion(&cmc.ConvertOptions{
 		Amount:  amount,
 		Symbol:  from,
